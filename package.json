@@ -1,0 +1,14 @@
+{
+  "name": "booking-service",
+  "version": "1.0.0",
+  "private": true,
+  "dependencies": {
+    "@typespec/compiler": "latest",
+    "@typespec/http": "latest",
+    "@typespec/openapi3": "latest",
+    "@typespec/versioning": "^0.83.0"
+  },
+  "scripts": {
+    "compile": "tsp compile ."
+  }
+}
