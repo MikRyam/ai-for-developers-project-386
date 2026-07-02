@@ -1,0 +1,38 @@
+{
+  "name": "booking-service-frontend",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "concurrently \"npm:mock-server\" \"npm:dev:vite\"",
+    "dev:vite": "vite",
+    "mock-server": "prism mock ../api/openapi.yaml -p 4010",
+    "generate:api-types": "openapi-typescript ../api/openapi.yaml -o src/api/generated-types.ts",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "@hookform/resolvers": "^5.4.0",
+    "@mantine/core": "^9.4.1",
+    "@mantine/hooks": "^9.4.1",
+    "@reduxjs/toolkit": "^2.12.0",
+    "react": "^19.2.7",
+    "react-dom": "^19.2.7",
+    "react-hook-form": "^7.80.0",
+    "react-redux": "^9.3.0",
+    "react-router-dom": "^7.18.1",
+    "zod": "^4.4.3"
+  },
+  "devDependencies": {
+    "@stoplight/prism-cli": "^5.15.11",
+    "@types/react": "^19.2.17",
+    "@types/react-dom": "^19.2.3",
+    "@vitejs/plugin-react": "^6.0.3",
+    "concurrently": "^10.0.3",
+    "openapi-typescript": "^7.13.0",
+    "postcss": "^8.5.3",
+    "postcss-preset-mantine": "^1.18.0",
+    "postcss-simple-vars": "^7.0.1",
+    "typescript": "^5.8.3",
+    "vite": "^8.1.3"
+  }
+}
