@@ -7,6 +7,7 @@ import {
   Center,
 } from '@mantine/core';
 import { useGetBookingsQuery } from '@/api/apiSlice';
+import { formatDateTime } from '@/utils/formatDateTime';
 
 export function AdminBookingsPage() {
   const { data: bookings, isLoading, isError } = useGetBookingsQuery();
@@ -27,10 +28,6 @@ export function AdminBookingsPage() {
     );
   }
 
-  const formatDateTime = (iso: string) => {
-    const d = new Date(iso);
-    return d.toLocaleString();
-  };
 
   const rows = bookings.map((b) => (
     <Table.Tr key={b.id}>

@@ -4,7 +4,7 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "dev": "concurrently \"npm:mock-server\" \"npm:dev:vite\"",
+    "dev": "npm run dev:vite",
     "dev:vite": "vite",
     "mock-server": "prism mock ../api/openapi.yaml -p 4010",
     "generate:api-types": "openapi-typescript ../api/openapi.yaml -o src/api/generated-types.ts",

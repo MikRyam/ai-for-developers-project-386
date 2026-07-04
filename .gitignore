@@ -3,3 +3,4 @@ tsp-output/
 .tsp-cache/
 *.log
 .DS_Store
+.playwright-mcp/

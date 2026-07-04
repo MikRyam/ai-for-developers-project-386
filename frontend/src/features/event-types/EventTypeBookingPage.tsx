@@ -27,6 +27,7 @@ import {
   bookingFormSchema,
   type BookingFormValues,
 } from '@/schemas/bookingFormSchema';
+import { formatDateTime } from '@/utils/formatDateTime';
 
 export function EventTypeBookingPage() {
   const { id } = useParams<{ id: string }>();
@@ -104,10 +105,6 @@ export function EventTypeBookingPage() {
     }
   };
 
-  const formatDateTime = (iso: string) => {
-    const d = new Date(iso);
-    return d.toLocaleString();
-  };
 
   return (
     <Container>

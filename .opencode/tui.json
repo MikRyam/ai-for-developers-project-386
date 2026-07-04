@@ -1,0 +1,10 @@
+{
+  "plugin": [
+    [
+      "opencode-provider-balance",
+      {
+        "enabled": true
+      }
+    ]
+  ]
+}
