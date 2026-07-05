@@ -28,6 +28,36 @@ npm run compile        # tsp compile . → api/openapi.yaml
 - **`@format("uuid")`** is on the scalar definition only; individual model fields use `Uuid` type directly.
 - **Build artifacts**: `tsp-output/` and `.tsp-cache/` are gitignored.
 
+## Git workflow
+
+- **Branch naming**: `feature/<description>` for new features, `fix/<description>` for bug fixes, `chore/<description>` for maintenance.
+- **Merge strategy**: PRs into `main` are **squash-merged**. The **PR title** becomes the final commit message on `main` — it MUST follow Conventional Commits.
+- **Conventional Commits**: all commits and PR titles follow the format `type(scope?): description`, where `type` is one of:
+
+  | Type | Purpose | Triggers release? |
+  |---|---|---|
+  | `feat` | New feature | Yes (minor bump) |
+  | `fix` | Bug fix | Yes (patch bump) |
+  | `chore` | Maintenance, tooling | No |
+  | `docs` | Documentation only | No |
+  | `test` | Adding or updating tests | No |
+  | `ci` | CI/CD changes | No |
+  | `refactor` | Code changes without feature/fix | No |
+  | `style` | Formatting, whitespace | No |
+  | `perf` | Performance improvements | No |
+
+- **Choosing the PR title type**: when a PR combines multiple categories of changes (e.g. tests + CI + tooling), pick the type by the **most significant change** for the project. Adding testing infrastructure, CI pipelines, or release automation is a new capability → `feat:`. Pure test additions with no other changes → `test:`. Pure CI tweaks → `ci:`. The type also determines whether release-please creates a release PR: only `feat:` and `fix:` trigger version bumps. If you want a release after the merge, use `feat:` or `fix:`.
+
+- **CI enforcement**: CI checks that:
+  - All commits in a PR follow Conventional Commits (`.github/workflows/commitlint.yml`)
+  - The PR title itself follows Conventional Commits (`.github/workflows/pr-title.yml`) — this is critical because of squash-merge
+- **At the end of each task**, the agent MUST output a "## Git workflow" section with:
+  1. Branch name suggestion (`feature/<description>` or `fix/<description>`)
+  2. Commit command with Conventional Commits message
+  3. Push command
+  4. PR title suggestion (the user will copy it when creating the PR on GitHub)
+  5. Reminder that CI checks e2e tests, commitlint, and PR title format
+
 ## Contract usage rules
 
 - `api/openapi.yaml` is the single source of truth for both frontend and backend. It is generated, never edit it by hand.

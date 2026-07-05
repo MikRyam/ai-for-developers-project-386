@@ -7,7 +7,8 @@
     "dev": "tsx watch src/server.ts",
     "generate:api-types": "openapi-typescript ../api/openapi.yaml -o src/types/generated-types.ts",
     "build": "tsc",
-    "start": "node dist/server.js"
+    "start": "node dist/server.js",
+    "start:test": "tsx src/server.ts"
   },
   "dependencies": {
     "@fastify/cors": "^11.0.1",
