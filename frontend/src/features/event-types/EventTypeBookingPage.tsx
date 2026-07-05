@@ -230,6 +230,8 @@ export function EventTypeBookingPage() {
                         return (
                           <Card
                             key={slot.startTime}
+                            data-testid="slot-card"
+                            data-start-time={slot.startTime}
                             withBorder
                             padding="sm"
                             onClick={() => {
