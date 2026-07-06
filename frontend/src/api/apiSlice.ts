@@ -9,7 +9,7 @@ type Slot = components['schemas']['Slot'];
 export const apiSlice = createApi({
   reducerPath: 'api',
   baseQuery: fetchBaseQuery({
-    baseUrl: import.meta.env.VITE_API_BASE_URL,
+    baseUrl: import.meta.env.PROD ? '' : import.meta.env.VITE_API_BASE_URL,
   }),
   tagTypes: ['EventType', 'Booking', 'Slot'],
   endpoints: (builder) => ({

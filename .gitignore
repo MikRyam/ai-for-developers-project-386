@@ -6,3 +6,4 @@ tsp-output/
 .playwright-mcp/
 playwright-report/
 test-results/
+**/dist/

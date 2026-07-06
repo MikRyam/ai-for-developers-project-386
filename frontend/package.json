@@ -8,6 +8,7 @@
     "dev:vite": "vite",
     "mock-server": "prism mock ../api/openapi.yaml -p 4010",
     "generate:api-types": "openapi-typescript ../api/openapi.yaml -o src/api/generated-types.ts",
+    "build": "vite build",
     "preview": "vite preview"
   },
   "dependencies": {

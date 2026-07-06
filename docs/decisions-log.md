@@ -169,7 +169,7 @@ backend/
 
 ---
 
-## 5. E2E-тесты, CI, Conventional Commits, release-please (шаг завершён, ожидает мёрджа)
+## 5. E2E-тесты, CI, Conventional Commits, release-please (шаг завершён, смёржен в main, релиз v1.1.0)
 
 ### E2E-тесты (`e2e/` — отдельный пакет)
 
@@ -221,6 +221,13 @@ backend/
 
 - **Merge-стратегия:** squash merge. Заголовок PR = сообщение коммита в main.
 - **Агент всегда предлагает заголовок PR** в конце задачи — пользователь копирует его при создании PR на GitHub
+
+**Проблемы, найденные после первого мёрджа (важно для будущих шагов):**
+
+1. **`package-lock.json` рассинхронизирован с `package.json`** — после добавления husky/commitlint в корневой `package.json` вручную, `package-lock.json` не был пересобран. `npm ci` в CI падает с `EUSAGE`/"Missing: ... from lock file". Решение: всегда `npm install` (не ручная правка) после изменения зависимостей, коммитить обновлённый lock-файл.
+2. **`.release-please-manifest.json` отсутствовал** — `release-please-config.json` без манифеста не работает: release-please не знает текущую версию, от которой считать бамп. Обязательный файл в корне для `release-type: simple`: `{ ".": "1.0.0" }`.
+3. **GitHub Actions по умолчанию не может создавать PR** — `release-please-action` падает с "GitHub Actions is not permitted to create or approve pull requests" пока не включена настройка репозитория: Settings → Actions → General → Workflow permissions → "Allow GitHub Actions to create and approve pull requests". Это настройка репозитория, не код — не сохраняется через git, при создании нового репозитория на курсе нужно будет включить заново.
+4. **PR от release-please требует ручного approve** — GitHub требует подтверждения запуска workflow для PR, открытых не напрямую человеком (в т.ч. через `release-please-action`). Нормально, подтверждается в интерфейсе Actions разово на PR.
 
 ---
 

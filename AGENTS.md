@@ -58,6 +58,12 @@ npm run compile        # tsp compile . → api/openapi.yaml
   4. PR title suggestion (the user will copy it when creating the PR on GitHub)
   5. Reminder that CI checks e2e tests, commitlint, and PR title format
 
+## Required GitHub repository settings (not in code, set once manually)
+
+- **Settings → General → Pull Requests → Squash merge → Default commit message**: must be set to **"Pull request title"** (not "Default message") — required so the squash commit matches what `pr-title.yml` validates and what release-please parses.
+- **Settings → Actions → General → Workflow permissions**: **"Allow GitHub Actions to create and approve pull requests"** must be enabled — required for `release-please-action` to open release PRs.
+- `.release-please-manifest.json` must exist in repo root (`{ ".": "1.0.0" }` or current version) — `release-please-config.json` alone is not sufficient.
+
 ## Contract usage rules
 
 - `api/openapi.yaml` is the single source of truth for both frontend and backend. It is generated, never edit it by hand.
