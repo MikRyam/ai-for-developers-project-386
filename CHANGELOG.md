@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.2.0](https://github.com/MikRyam/ai-for-developers-project-386/compare/v1.1.0...v1.2.0) (2026-07-06)
+
+
+### Features
+
+* add Docker deployment with unified frontend+backend image ([#8](https://github.com/MikRyam/ai-for-developers-project-386/issues/8)) ([5be37aa](https://github.com/MikRyam/ai-for-developers-project-386/commit/5be37aaaf4a318694e22de24a4b1ac509bda0437))
+
 ## [1.1.0](https://github.com/MikRyam/ai-for-developers-project-386/compare/v1.0.0...v1.1.0) (2026-07-05)
 
 
