@@ -4,6 +4,8 @@
 
 ```bash
 npm run compile        # tsp compile . → api/openapi.yaml
+docker build -t booking-service .
+docker run -e PORT=3000 -p 3000:3000 booking-service
 ```
 
 ## Project structure
@@ -15,6 +17,9 @@ npm run compile        # tsp compile . → api/openapi.yaml
 | `src/event-types.tsp` | `interface EventTypes` (4 endpoints) |
 | `src/bookings.tsp` | `interface Bookings` (2 endpoints) |
 | `tspconfig.yaml` | Emitter: `@typespec/openapi3` → `api/openapi.yaml` |
+| `Dockerfile` | Multi-stage: frontend-build → backend-build → production (node:22-alpine) |
+| `backend/` | Fastify API server (port 3000, `process.env.PORT`) |
+| `frontend/` | React + Vite SPA (served as static by backend in production) |
 
 ## Key conventions
 
@@ -70,3 +75,12 @@ npm run compile        # tsp compile . → api/openapi.yaml
 - To change the contract: edit the `.tsp` files in `src/`, then run `npm run compile` to regenerate `api/openapi.yaml`.
 - Frontend and backend are implemented as separate, independent parts based solely on `api/openapi.yaml` — do not read or depend on each other's implementation code.
 - If a contract change is needed while implementing frontend or backend, stop and update the `.tsp` source first, regenerate, then continue implementation against the updated contract.
+
+## Docker
+
+- **Multi-stage build** (3 stages): frontend (vite build) → backend (tsc) → production (node:22-alpine, only prod deps)
+- **Productions image**: backend serves frontend static files via `@fastify/static` + SPA fallback (`setNotFoundHandler` → `index.html`)
+- **CORS**: disabled in production (`NODE_ENV=production`) — frontend and backend are on the same origin
+- **Port**: backend listens on `process.env.PORT` (set automatically by Render, fallback 3000 locally)
+- **`.dockerignore`**: excludes `node_modules`, `dist`, `.git`, `e2e`, `tsp-output`, `.tsp-cache`, env files, docs
+- **Deployed at**: [booking-service-uc8t.onrender.com](https://booking-service-uc8t.onrender.com) (Render, Frankfurt, free plan)
